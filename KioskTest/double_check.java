@@ -7,7 +7,6 @@ public class double_check extends MenuTest{
        System.out.println(doubleCheck);
        System.out.println("1. 확인        2. 취소");
            int no = sc.nextInt();
-
            if (no == 1) {
                System.out.println(menu.split("\\|")[0].trim() + "가 장바구니에 추가되었습니다.");
                super.priceMenu.add(buprice);

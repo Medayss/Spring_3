@@ -17,7 +17,6 @@ public class Order extends MenuTest{
                 System.out.println("주문이 완료되었습니다.");
                 System.out.println("대기번호는 [ " + i + " ] 번 입니다.");
                 System.out.println("(3초 후 메뉴판으로 돌아갑니다.)");
-
                 Thread.sleep(3000);
                 kiosk.kiosk();
             } else if (no == 2) {
