@@ -2,7 +2,9 @@ package KioskTest;
 
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class Kiosk extends MenuTest{
 
@@ -32,8 +34,12 @@ public class Kiosk extends MenuTest{
                     }
                     int no = sc.nextInt();
                     List<String> burgerList = super.BL();
+                    List<Double> burgerPrice = super.BP();
                     if (no == 1 || no == 2 || no == 3 || no == 4 || no == 5) {
+                        Double bprice = burgerPrice.get((no - 1));
                         String burger = burgerList.get((no - 1));
+                        Order order = new Order();
+                        order.order(bprice);
                         double_check doubleCheck = new double_check();
                         doubleCheck.Double_check(burger);
                     } else if (no == 6) {
@@ -46,7 +52,6 @@ public class Kiosk extends MenuTest{
                 System.out.println("아이스크림 목록으로 이동합니다.");
                 System.out.println("아래 메뉴판을 보시고 메뉴를 골라 입력해주세요.");
                 System.out.println("[ Ice Cream MENU ]");
-
 
                 while (true) {
                     for (int i = 0; i < super.IceCreamMenu.length ; i++) {
@@ -120,6 +125,7 @@ public class Kiosk extends MenuTest{
             } else {
                 System.out.println("잘못 입력하셨습니다. 다시 입력해주세요");
             }
+
 
 
         }

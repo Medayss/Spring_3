@@ -1,14 +1,14 @@
 package KioskTest;
 
 public class Order extends MenuTest{
-    public void order() throws InterruptedException {
-        System.out.println(super.choiceMenu);
+    public void order(Double bprice) throws InterruptedException {
         while (true) {
-            for (int i = 0; i < super.OrderMenu.length ; i++) {
-                System.out.printf( super.OrderMenu[i]);
-                System.out.println("[ Total ]");
-                System.out.println("W" );
-            }
+            Double sum1 = priceMenu.stream().reduce(0D, Double::sum);
+            System.out.println("아래와 같이 주문하시겠습니까?");
+            System.out.println(super.choiceMenu);
+            System.out.println("[ Total ]");
+            System.out.println("W : " + sum1 );
+            System.out.println("1. 확인     2. 취소");
             Kiosk kiosk = new Kiosk();
             int no = sc.nextInt();
             int stay = 0;

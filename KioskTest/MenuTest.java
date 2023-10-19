@@ -12,7 +12,6 @@ public class MenuTest {
      String[] IceCreamMenu = {"1. Shake of the week   | W 5.9 | 바닐라, 초콜렛, 솔티드 카라멜, 블랙&화이트, 스트로베리, 피넛버터, 커피", "2. Red Bean Shake    | W 6.5 | 신선한 커스터드와 함께 우유와 레드빈이 블렌딩 된 시즈널 쉐이크", "3. Floats | W 5.9 | 루트 비어, 퍼플 카우, 크림시클", "4. 처음으로 돌아가기"};
      String[] DrinkMenu = {"1. Fresh Brewed Iced Tea   | R : W 3.9 L : W 4.5 | 매장에서 직접 만드는 상큼한 레몬에이드(오리지날/시즈절)", "2. Fresh Brewed Iced Tea    | W 3.4 | 직접 유기농 홍차를 우려낸 아이스티", "3. Fifty / Fifty | W 3.5 | 레몬에이드와 아이스티의 만남", "4. Fountain Soda | W 2.7 | 코카콜라, 코카콜라 제로, 스프라이트 환타 오렌지, 환타 그레이프", "5. Abita Root Beer | Bottle : W 4.4 | 청량감 있는 독특한 미국식 무알콜 탄산음료", "6. Bottled Water | W 1.0 ㅣ 지리산 암반대수층으로 만든 프리미엄 생수", "7. 처음으로 돌아가기"};
      String[] BeerMenu = {"1. ShackMeister Ale          | W 9.8 | 쉐이크쉑 버거를 위해 뉴욕 브루클린 브루어리에서 특별히 양조한 에일 맥주", "2. Magpie Brewing Co.    | Pale Ale, Draft : W 6.8 | ", "3. 처음으로 돌아가기"};
-     String[] OrderMenu = {"아래와 같이 주문하시겠습니까?", "[ Total ]", "\nW", "\n1. 확인     2. 취소"};
     // 인스턴스화
 
     static Scanner sc = new Scanner(System.in);
@@ -28,7 +27,7 @@ public class MenuTest {
 
     // 장바구니
     static List<String> choiceMenu = new ArrayList<>();
-    static Double[] priceMenu = {};
+    List<Double> priceMenu = new ArrayList<>();
     static String resetMenu;
 
 
