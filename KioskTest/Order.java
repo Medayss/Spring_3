@@ -5,7 +5,9 @@ public class Order extends MenuTest{
         while (true) {
             Double sum1 = super.priceMenu.stream().reduce(0D, Double::sum);
             System.out.println("아래와 같이 주문하시겠습니까?");
-            System.out.println(super.choiceMenu);
+            for (int i = 0; i < choiceMenu.size(); i++) {
+                System.out.printf("%s \n", super.choiceMenu.get(i));
+            }
             System.out.println("[ Total ]");
             System.out.printf("W : " + sum1 + "\n" );
             System.out.println("1. 확인     2. 취소");
