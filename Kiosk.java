@@ -2,9 +2,7 @@ package KioskTest;
 
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class Kiosk extends MenuTest{
 
@@ -35,12 +33,12 @@ public class Kiosk extends MenuTest{
                     int no = sc.nextInt();
                     List<Double> burgerPrice = super.BP();
                     List<String> burgerList = super.BL();
-                    
+
                     if (no == 1 || no == 2 || no == 3 || no == 4 || no == 5) {
                         Double bprice = burgerPrice.get((no - 1));
                         String burger = burgerList.get((no - 1));
                         double_check doubleCheck = new double_check();
-                        doubleCheck.Double_check(burger);
+                        doubleCheck.Double_check(burger, bprice);
                     } else if (no == 6) {
                         System.out.println("처음 화면으로 돌아갑니다.");
                     } else {
@@ -57,11 +55,13 @@ public class Kiosk extends MenuTest{
                         System.out.printf("%s \n", super.IceCreamMenu[i]);
                     }
                     int no = sc.nextInt();
+                    List<Double> iceCreamPrice = super.IP();
                     List<String> IceCreamList = super.IL();
                     if (no == 1 || no == 2 || no == 3) {
+                        Double iprice = iceCreamPrice.get((no - 1));
                         String icecream = IceCreamList.get((no - 1));
                         double_check doubleCheck = new double_check();
-                        doubleCheck.Double_check(icecream);
+                        doubleCheck.Double_check(icecream, iprice);
                     } else if (no == 4) {
                         System.out.println("처음 화면으로 돌아갑니다.");
                         kiosk.kiosk();
@@ -80,11 +80,13 @@ public class Kiosk extends MenuTest{
                         System.out.printf("%s \n", super.DrinkMenu[i]);
                     }
                     int no = sc.nextInt();
+                    List<Double> drinkPrice = super.DP();
                     List<String> DrinkList = super.DrinkL();
                     if (no == 1 || no == 2 || no == 3|| no == 4|| no == 5|| no == 6) {
+                        Double drprice = drinkPrice.get((no - 1));
                         String drink = DrinkL().get((no - 1));
                         double_check doubleCheck = new double_check();
-                        doubleCheck.Double_check(drink);
+                        doubleCheck.Double_check(drink, drprice);
                     } else if (no == 7) {
                         System.out.println("처음 화면으로 돌아갑니다.");
                         kiosk.kiosk();
@@ -99,11 +101,13 @@ public class Kiosk extends MenuTest{
                         System.out.printf("%s \n", super.BeerMenu[i]);
                     }
                     int no = sc.nextInt();
+                    List<Double> beerPrice = super.BEERP();
                     List<String> BeerList = super.BeerL();
                     if (no == 1|| no == 2) {
                         String beer = BeerL().get((no - 1));
+                        Double beerprice = BEERP().get((no - 1));
                         double_check doubleCheck = new double_check();
-                        doubleCheck.Double_check(beer);
+                        doubleCheck.Double_check(beer, beerprice);
                     } else if (no == 3) {
                         System.out.println("처음 화면으로 돌아갑니다.");
                         kiosk.kiosk();
@@ -124,9 +128,6 @@ public class Kiosk extends MenuTest{
             } else {
                 System.out.println("잘못 입력하셨습니다. 다시 입력해주세요");
             }
-
-
-
         }
     }
 }
