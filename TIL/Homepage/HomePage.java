@@ -1,5 +1,7 @@
 package TIL.Homepage;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class HomePage implements Back {
@@ -17,7 +19,6 @@ public class HomePage implements Back {
     @Override
     public void createPost() {
         Scanner sc = new Scanner(System.in);
-
     }
 }
 
