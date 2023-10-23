@@ -25,7 +25,7 @@ public class Main extends HomePage implements Back {
                     System.out.println("수정할 게시글 번호를 입력해주세요");
                     int fix = getLine.nextInt();
                     System.out.println("내용을 입력하세요");
-                    String fixPost = getLine.nextLine();                // 왜 실행이 안되는 것인가.... 너가 실행이 안되니 fixPost에 아무것도 입력이 안되잖니...
+                    String fixPost = getLine.next();               // 왜 실행이 안되는 것인가.... 너가 실행이 안되니 fixPost에 아무것도 입력이 안되잖니... next 는 됨
                     super.userPosting.set(fix - 1, fixPost);
                     System.out.println("수정이 완료 되었습니다.");
                     Main go = new Main();
