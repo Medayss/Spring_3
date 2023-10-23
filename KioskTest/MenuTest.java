@@ -28,7 +28,8 @@ public class MenuTest {
     // 장바구니
     static List<String> choiceMenu = new ArrayList<>();
     static List<Double> priceMenu = new ArrayList<>();
-    static String resetMenu;
+    static List<String> totalMenu = new ArrayList<>();
+    static List<Double> totalPrice = new ArrayList<>();
 
     public List<String> BL() {
         List<String> bl = new ArrayList<>();
