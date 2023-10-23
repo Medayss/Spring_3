@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class Double_Check extends HomePage implements Back{
     public void double_check(String post, LocalTime posttime) {
-
         while (true) {
             System.out.println("게시글 작성을 완료 하셨습니까?");
             System.out.println("1.예          2.아니요");

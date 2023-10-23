@@ -1,7 +1,7 @@
 package TIL.Homepage;
 
 
-public class Start extends HomePage {
+public class Start {
     public static void main(String[] args) {
         // 게시판 구성요소
         // CRUD

@@ -3,10 +3,9 @@ package TIL.Homepage;
 import java.time.LocalTime;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
 
 public interface Back {
-    void user();
-    void contents();
     void createPost();
 
     List<String> userPosting = new LinkedList<>();

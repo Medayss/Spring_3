@@ -8,16 +8,12 @@ public class Main extends HomePage implements Back {
             System.out.println("게시판 입니다.");
             System.out.println("-----------------------------------");
             System.out.println("번호           내용              작성시간");
-            // 게시글 보여주기
+            // 게시글 보여주기 for 반복문으로 userPosting 배열을 하나씩 보여줌
             for (int i = 0; i < userPosting.size(); i++) {
-                System.out.printf(String.valueOf(i + 1));
-                System.out.print("             ");
-                System.out.printf(userPosting.get(i));
-                System.out.print("         ");
-                System.out.println(postingTime.get(i));
+                System.out.println((i + 1) + "             " + userPosting.get(i) + ("         " + postingTime.get(i)));
             }
             System.out.println("작성     수정     삭제");
-            // 게시글 작성
+            // 게시글 작성 키오스크랑 다르게 switch case 문 사용
             Scanner getLine = new Scanner(System.in);
             String sc = getLine.nextLine();
             switch (sc) {
