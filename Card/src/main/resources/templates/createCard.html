@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Card</title>
+    <style>
+        /* 스타일링은 필요에 따라 추가하세요. */
+        .card {
+            border: 1px solid #000;
+            padding: 10px;
+            margin: 10px;
+            width: 200px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<form id="cardForm">
+    <label for="cardText">할 일 텍스트:</label>
+    <input type="text" id="cardText" name="cardText" required>
+    <button type="button" onclick="createCard()">할 일 카드 생성</button>
+</form>
+
+<div id="cardContainer"></div>
+
+<script>
+    function createCard() {
+        var cardText = document.getElementById('cardText').value;
+        if (cardText.trim() === '') {
+            alert('할 일 텍스트를 입력하세요.');
+            return;
+        }
+
+        var cardContainer = document.getElementById('cardContainer');
+        var card = document.createElement('div');
+        card.className = 'card';
+        card.textContent = cardText;
+        cardContainer.appendChild(card);
+    }
+</script>
+</body>
+</html>

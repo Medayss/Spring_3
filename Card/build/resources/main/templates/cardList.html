@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Card List</title>
+</head>
+<body>
+<h2>Card List</h2>
+<ul>
+    <!-- 카드 목록을 표시 -->
+    <li th:each="card : ${cards}" th:text="${card.cardText}"></li>
+</ul>
+</body>
+</html>
