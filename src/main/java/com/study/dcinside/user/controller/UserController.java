@@ -46,23 +46,4 @@ public class UserController {
         userService.withdraw(userWithdrawRequestDto, userDetails.getUser());
         return ResponseEntity.ok("OK");
     }
-
-    @PutMapping("/nickname")
-    public ResponseEntity<UsernameResponseDto> updateNickname(
-        @RequestBody UsernameRequestDto nicknameRequestDto,
-        @AuthenticationPrincipal UserDetailsImpl userDetails
-    ) {
-        UsernameResponseDto responseDto = userService.updateNickname(userDetails.getUser(),
-            nicknameRequestDto);
-        return ResponseEntity.ok(responseDto);
-    }
-
-    @PutMapping("/password")
-    public ResponseEntity<String> updateIntro(
-        @RequestBody PasswordRequestDto passwordRequestDto,
-        @AuthenticationPrincipal UserDetailsImpl userDetails
-    ) {
-        userService.updatePassword(userDetails.getUser(), passwordRequestDto);
-        return ResponseEntity.ok("OK");
-    }
 }

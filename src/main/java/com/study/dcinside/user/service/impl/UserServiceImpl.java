@@ -7,7 +7,6 @@ import com.study.dcinside.user.dto.response.UserResponseDto;
 import com.study.dcinside.user.entity.User;
 import com.study.dcinside.user.entity.UserRole;
 import com.study.dcinside.user.exception.AlreadyExistEmailException;
-import com.study.dcinside.user.exception.AlreadyExistNicknameException;
 import com.study.dcinside.user.exception.NotFoundUserException;
 import com.study.dcinside.user.exception.NotMatchConfirmationPhrase;
 import com.study.dcinside.user.exception.NotMatchCurrentPassword;

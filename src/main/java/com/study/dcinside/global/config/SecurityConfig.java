@@ -1,31 +1,90 @@
 package com.study.dcinside.global.config;
 
+import com.study.dcinside.global.security.filter.JwtAuthenticationFilter;
+import com.study.dcinside.global.security.filter.JwtAuthorizationFilter;
+import com.study.dcinside.global.security.filter.JwtExceptionHandlerFilter;
+import com.study.dcinside.global.security.jwt.JwtUtil;
+import com.study.dcinside.global.security.userdetails.UserDetailsServiceImpl;
+import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.header.writers.XXssProtectionHeaderWriter.HeaderValue;
 
 @EnableWebSecurity
 @Configuration
+@RequiredArgsConstructor
 public class SecurityConfig {
+
+    private final JwtUtil jwtUtil;
+    private final UserDetailsServiceImpl userDetailsService;
+    private final AuthenticationConfiguration authenticationConfiguration;
+    private final JwtExceptionHandlerFilter jwtExceptionHandlerFilter;
+
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        return httpSecurity             // SecurityFilterChain에서 요청에 접근할 수 있어서 인증, 인가 서비스에 사용
-                .httpBasic().disable()      // http basic auth 기반으로 로그인 인증창이 뜬다. 기본 인증을 이용하지 않으려면 .disable()을 추가해준다.
-                .csrf().disable()       // csrf, api server이용시 .disable (html tag를 통한 공격)
-                .cors()	 //  다른 도메인의 리소스에 대해 접근이 허용되는지 체크
-                .and()   // 묶음 구분(httpBasic(),crsf,cors가 한묶음)
-                .authorizeRequests()    // 각 경로 path별 권한 처리
-                .antMatchers("/api/**").permitAll()         // 안에 작성된 경로의 api 요청은 인증 없이 모두 허용한다.
-                .antMatchers("/api/v1/users/join", "/api/v1/users/login").permitAll()
-                .and()
-                .sessionManagement()        // 세션 관리 기능을 작동한다.      .maximunSessions(숫자)로 최대 허용가능 세션 수를 정할수 있다.(-1로 하면 무제한 허용)
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // jwt사용하는 경우 씀(STATELESS는 인증 정보를 서버에 담지 않는다.)
-                .and()
-                //   .addFilterBefore(new JwtTokenFilter(userService, secretKey), UsernamePasswordAuthenticationFilter.class)
-                //UserNamePasswordAuthenticationFilter적용하기 전에 JWTTokenFilter를 적용 하라는 뜻 입니다.
-                .build();
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
+        return configuration.getAuthenticationManager();
+    }
+
+    @Bean
+    public JwtAuthenticationFilter jwtAuthenticationFilter() throws Exception {
+        JwtAuthenticationFilter filter = new JwtAuthenticationFilter(jwtUtil);
+        filter.setAuthenticationManager(authenticationManager(authenticationConfiguration));
+        return filter;
+    }
+
+    @Bean
+    public JwtAuthorizationFilter jwtAuthorizationFilter() {
+        return new JwtAuthorizationFilter(jwtUtil, userDetailsService);
+    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf(AbstractHttpConfigurer::disable);
+
+        // XSS 방지
+        http.headers(headers -> headers
+            .xssProtection(xss -> xss
+                .headerValue(HeaderValue.ENABLED_MODE_BLOCK)
+            )
+        );
+
+        http.authorizeHttpRequests(authorizeHttpRequests ->
+                authorizeHttpRequests
+//                .requestMatchers("/swagger-ui/**", "/swagger-resources/**", "/v3/api-docs/**")
+//                .permitAll()
+                    .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+                    .requestMatchers(HttpMethod.POST, "/api/v1/users/login", "/api/v1/users")
+                    .permitAll()
+                    .requestMatchers(HttpMethod.GET, "/api/v1/boards/**").permitAll()
+                    .anyRequest().authenticated()
+        );
+
+        http.sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(
+            SessionCreationPolicy.STATELESS));
+
+        http.formLogin(AbstractHttpConfigurer::disable);
+
+        http.addFilterBefore(jwtExceptionHandlerFilter, JwtAuthenticationFilter.class);
+        http.addFilterBefore(jwtAuthorizationFilter(), JwtAuthenticationFilter.class);
+        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+
+        return http.build();
     }
 }
