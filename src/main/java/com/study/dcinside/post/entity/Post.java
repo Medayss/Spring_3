@@ -1,8 +1,11 @@
 package com.study.dcinside.post.entity;
 
+import com.study.dcinside.comment.entity.Comment;
 import com.study.dcinside.post.dto.request.PostRequestDto;
 import com.study.dcinside.user.entity.User;
 import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -35,8 +38,8 @@ public class Post {
         this.user = user;
     }
 
-//    @OneToMany(mappedBy = "post")
-//    private final List<Comment> comments = new ArrayList<>();
+    @OneToMany(mappedBy = "post")
+    private final List<Comment> comments = new ArrayList<>();
 
     public void updatd(PostRequestDto postRequestDto) {
         this.title = postRequestDto.getTitle();

@@ -1,4 +1,4 @@
-package com.study.dcinside.post.dto.request;
+package com.study.dcinside.post.dto.response;
 
 import com.study.dcinside.comment.dto.respons.CommentWithUserResponseDTO;
 import lombok.Builder;
@@ -11,8 +11,9 @@ import java.util.List;
 public class PostWithCommentResponseDto {
     private Long id;
     private String title;
+    private Long likes;
     private String content;
-    private String nickname;
+    private String username;
     private String attachment;
     private List<CommentWithUserResponseDTO> comment;
 }

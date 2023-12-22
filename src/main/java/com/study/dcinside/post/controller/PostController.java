@@ -1,7 +1,7 @@
 package com.study.dcinside.post.controller;
 
 import com.study.dcinside.post.dto.request.PostRequestDto;
-import com.study.dcinside.post.dto.request.PostWithCommentResponseDto;
+import com.study.dcinside.post.dto.response.PostWithCommentResponseDto;
 import com.study.dcinside.post.dto.response.PostResponseDto;
 import com.study.dcinside.post.service.PostService;
 import com.study.dcinside.global.security.userdetails.UserDetailsImpl;
